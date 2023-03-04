@@ -1,0 +1,55 @@
+@import "../styles/scss/mixins";
+@import "../styles/scss/variables";
+
+.overViewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.budgetBtn {
+  @include btnStyle($primaryColor, $secondryColor, $primaryColor, 5px);
+  margin-right: 5px;
+  @include media(480) {
+    padding: 5px 15px;
+  }
+}
+.expenseBtn {
+  @include btnStyle(transparent, $primaryColor, $grayColor, 5px);
+  @include media(480) {
+    padding: 5px 15px;
+  }
+}
+.budgetForm {
+  max-width: 600px;
+  margin: 0 auto;
+  > div:not(:last-child) {
+    @include spaceY(5px);
+    margin-bottom: 10px;
+  }
+  label {
+    @include labelStyle;
+  }
+  input {
+    @include inputStyle;
+    @include media(480) {
+      flex-grow: 1;
+    }
+  }
+}
+.formBtnBox {
+  @include spaceY(5px);
+
+  margin: 20px 0;
+  @include media(480) {
+    flex-direction: row-reverse;
+    justify-content: center;
+  }
+  .addBtn {
+    @include btnStyle($primaryColor, $whiteColor, $primaryColor, 5px 15px);
+  }
+  .cancelBtn {
+    @include btnStyle(transparent, $primaryColor, $primaryColor, 5px 15px);
+  }
+}

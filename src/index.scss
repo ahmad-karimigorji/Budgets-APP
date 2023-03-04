@@ -5,6 +5,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+@import "./styles/scss/variables";
+
 body {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  background-color: $bgColor;
 }

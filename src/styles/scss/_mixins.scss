@@ -1,0 +1,44 @@
+@import "../scss/variables";
+
+@mixin media($width) {
+  @if ($width == 480) {
+    @media screen and (min-width: 480px) {
+        @content;
+    }
+  }
+}
+
+@mixin btnStyle($bgColor, $color, $borderColor, $padding) {
+  background-color: $bgColor;
+  color: $color;
+  border: 1px solid $borderColor;
+  border-radius: 3px;
+  padding: $padding;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@mixin labelStyle {
+  font-weight: 600;
+  color: $textColor;
+}
+@mixin inputStyle {
+  outline: none;
+  padding: 5px 10px;
+  border: 1px solid $grayColor;
+  border-radius: 3px;
+  &:focus {
+    border-color: $primaryColor;
+  }
+}
+@mixin spaceX($gap){
+  display: flex;
+  gap: $gap;
+
+}
+@mixin spaceY($gap){
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+
+}

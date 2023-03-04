@@ -1,0 +1,35 @@
+@import "../styles/scss/mixins";
+@import "../styles/scss/variables";
+.expenseForm {
+  max-width: 600px;
+  margin: 0 auto;
+  > div:not(:last-child) {
+    @include spaceY(5px);
+    margin-bottom: 10px;
+  }
+  label {
+    @include labelStyle;
+  }
+  input,
+  select {
+    @include inputStyle;
+    @include media(480) {
+      flex-grow: 1;
+    }
+  }
+}
+.formBtnBox {
+  @include spaceY(5px);
+
+  margin: 20px 0;
+  @include media(480) {
+    flex-direction: row-reverse;
+    justify-content: center;
+  }
+  .addBtn {
+    @include btnStyle($primaryColor, $whiteColor, $primaryColor, 5px 15px);
+  }
+  .cancelBtn {
+    @include btnStyle(transparent, $primaryColor, $primaryColor, 5px 15px);
+  }
+}
