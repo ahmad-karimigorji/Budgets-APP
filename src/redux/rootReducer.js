@@ -5,7 +5,7 @@ import expenseReducer from "./expense/expenseReducer";
 const combineReducer = combineReducers;
 
 const reducer = combineReducer({
-  budger: budgetReducer,
+  budget: budgetReducer,
   expense: expenseReducer,
 });
 
