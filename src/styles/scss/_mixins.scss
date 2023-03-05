@@ -42,3 +42,7 @@
   gap: $gap;
 
 }
+@mixin errorStyle{
+    font-size: 13px;
+    color: $errorColor;
+}

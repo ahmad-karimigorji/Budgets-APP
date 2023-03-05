@@ -36,7 +36,7 @@
 }
 .BtnBox {
   @include spaceX(5px);
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 
   .addBtn {

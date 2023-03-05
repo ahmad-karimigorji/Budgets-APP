@@ -17,6 +17,9 @@
       flex-grow: 1;
     }
   }
+  .error{
+    @include errorStyle;
+  }
 }
 .formBtnBox {
   @include spaceY(5px);
@@ -32,4 +35,8 @@
   .cancelBtn {
     @include btnStyle(transparent, $primaryColor, $primaryColor, 5px 15px);
   }
+}
+.warning{
+  text-align: center;
+  color: $textColor;
 }

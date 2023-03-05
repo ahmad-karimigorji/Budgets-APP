@@ -37,6 +37,9 @@
       flex-grow: 1;
     }
   }
+  .error{
+    @include errorStyle;
+  }
 }
 .formBtnBox {
   @include spaceY(5px);
