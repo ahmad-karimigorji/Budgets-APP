@@ -11,7 +11,11 @@ const budgetReducer = (state = initialBudgetState, action) => {
     case ADD_BUDGET:
       const newBudgets = [...state.budgets];
       newBudgets.unshift(payload);
-      return { ...state, newBudgets, total: state.total + payload.amount };
+      return {
+        ...state,
+        budgets: newBudgets,
+        total: state.total + parseInt(payload.amount),
+      };
 
     default:
       return state;

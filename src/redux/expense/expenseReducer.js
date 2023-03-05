@@ -11,7 +11,11 @@ const expenseReducer = (state = initialExpenseState, action) => {
     case ADD_EXPENSE:
       const newExpenses = [...state.expenses];
       newExpenses.unshift(payload);
-      return { ...state, newExpenses, totaol: state.total + payload.cost };
+      return {
+        ...state,
+        expenses: newExpenses,
+        total: state.total + parseInt(payload.cost),
+      };
     default:
       return state;
   }
