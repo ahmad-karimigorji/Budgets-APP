@@ -13,7 +13,7 @@ const expenseReducer = (state = initialExpenseState, action) => {
       newExpenses.unshift(payload);
       return { ...state, newExpenses, totaol: state.total + payload.cost };
     default:
-      break;
+      return state;
   }
 };
 export default expenseReducer;

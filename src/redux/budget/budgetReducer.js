@@ -14,7 +14,7 @@ const budgetReducer = (state = initialBudgetState, action) => {
       return { ...state, newBudgets, total: state.total + payload.amount };
 
     default:
-      break;
+      return state;
   }
 };
 export default budgetReducer;
