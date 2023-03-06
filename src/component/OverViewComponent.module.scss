@@ -28,9 +28,12 @@
     padding: 5px 15px;
   }
 }
-.budgetForm {
+
+.form {
   max-width: 600px;
   margin: 0 auto;
+  padding: 20px 0;
+  border-bottom: 1px solid $grayColor;
   > div:not(:last-child) {
     @include spaceY(5px);
     margin-bottom: 10px;
@@ -38,8 +41,9 @@
   label {
     @include labelStyle;
   }
-  input {
-    @include inputStyle;
+  input,
+  select {
+     @include inputStyle;
     @include media(480) {
       flex-grow: 1;
     }
@@ -50,7 +54,6 @@
 }
 .formBtnBox {
   @include spaceY(5px);
-
   margin: 20px 0;
   @include media(480) {
     flex-direction: row-reverse;
@@ -62,4 +65,8 @@
   .cancelBtn {
     @include btnStyle(transparent, $primaryColor, $primaryColor, 5px 15px);
   }
+}
+.warning{
+  text-align: center;
+  color: $textColor;
 }
