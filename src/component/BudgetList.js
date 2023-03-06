@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./BudgetList.module.scss";
 import { HiOutlineTrash } from "react-icons/hi";
+import { deleteExpense } from "../redux/expense/expenseActions";
 
 const BudgetList = () => {
   const { budgets } = useSelector((state) => state.budget);
@@ -18,7 +19,13 @@ export default BudgetList;
 
 const BudgetComponent = ({ budget }) => {
   const { expense } = useSelector((state) => state);
+  const dispatch = useDispatch();
   const [isView, setIsView] = useState(false);
+
+  const deleteHandler = (expense) => {
+    dispatch(deleteExpense(expense))
+    filteredExpense.length === 0 && setIsView(false)
+  }
 
   let expenseTotal = 0;
   const filteredExpense = expense.expenses.reduce((accu, curr) => {
@@ -64,7 +71,10 @@ const BudgetComponent = ({ budget }) => {
                 <span className={styles.date}>{`${new Date(
                   item.creatAt
                 ).toLocaleString()}`}</span>
-                <button className={styles.iconBtn}>
+                <button
+                  className={styles.iconBtn}
+                  onClick={() => deleteHandler(item)}
+                >
                   <HiOutlineTrash />
                 </button>
               </div>
