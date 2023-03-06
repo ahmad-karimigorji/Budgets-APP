@@ -1,4 +1,8 @@
-import { ADD_EXPENSE, DELETE_EXPENSE } from "./expenseTypes";
+import {
+  ADD_EXPENSE,
+  DELETE_ALL_EXPENSES_OF_BUDGET,
+  DELETE_EXPENSE,
+} from "./expenseTypes";
 
 export const addExpense = (expense) => {
   return {
@@ -10,5 +14,11 @@ export const deleteExpense = (expense) => {
   return {
     type: DELETE_EXPENSE,
     payload: expense,
+  };
+};
+export const deleteAllExpensesOfBudget = (categoryId) => {
+  return {
+    type: DELETE_ALL_EXPENSES_OF_BUDGET,
+    payload: categoryId,
   };
 };

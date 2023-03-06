@@ -1,4 +1,4 @@
-import { ADD_BUDGET } from "./budgetTypes";
+import { ADD_BUDGET, DELETE_BUDGET } from "./budgetTypes";
 
 const initialBudgetState = {
   budgets: [],
@@ -15,6 +15,13 @@ const budgetReducer = (state = initialBudgetState, action) => {
         ...state,
         budgets: newBudgets,
         total: state.total + parseInt(payload.amount),
+      };
+    case DELETE_BUDGET:
+      const filtered = state.budgets.filter((item) => item.id !== payload.id);
+      return {
+        ...state,
+        budgets: filtered,
+        total: state.total - parseInt(payload.amount),
       };
 
     default:

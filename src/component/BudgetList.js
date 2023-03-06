@@ -2,7 +2,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./BudgetList.module.scss";
 import { HiOutlineTrash } from "react-icons/hi";
-import { deleteExpense } from "../redux/expense/expenseActions";
+import {
+  deleteAllExpensesOfBudget,
+  deleteExpense,
+} from "../redux/expense/expenseActions";
+import { deleteBudget } from "../redux/budget/budgetActions";
 
 const BudgetList = ({ setIsExpenseForm }) => {
   const { budgets } = useSelector((state) => state.budget);
@@ -26,9 +30,15 @@ const BudgetComponent = ({ budget, setIsExpenseForm }) => {
   const dispatch = useDispatch();
   const [isView, setIsView] = useState(false);
 
-  const deleteHandler = (expense) => {
+  const deleteExpenseHandler = (expense) => {
     dispatch(deleteExpense(expense));
-    filteredExpense.length === 0 && setIsView(false);
+    // filteredExpense.length === 0 && setIsView(false);
+    setIsView(false);
+  };
+  const deleteBudgetHandler = (budget) => {
+    dispatch(deleteBudget(budget));
+    dispatch(deleteAllExpensesOfBudget(budget.id));
+    setIsView(false);
   };
 
   let expenseTotal = 0;
@@ -76,6 +86,12 @@ const BudgetComponent = ({ budget, setIsExpenseForm }) => {
         >
           View Expense
         </button>
+        <button
+          className={styles.deleteBtn}
+          onClick={() => deleteBudgetHandler(budget)}
+        >
+          Delete
+        </button>
       </div>
 
       {isView && (
@@ -92,7 +108,7 @@ const BudgetComponent = ({ budget, setIsExpenseForm }) => {
                 ).toLocaleString()}`}</span>
                 <button
                   className={styles.iconBtn}
-                  onClick={() => deleteHandler(item)}
+                  onClick={() => deleteExpenseHandler(item)}
                 >
                   <HiOutlineTrash />
                 </button>

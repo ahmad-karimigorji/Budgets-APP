@@ -1,4 +1,8 @@
-import { ADD_EXPENSE, DELETE_EXPENSE } from "./expenseTypes";
+import {
+  ADD_EXPENSE,
+  DELETE_ALL_EXPENSES_OF_BUDGET,
+  DELETE_EXPENSE,
+} from "./expenseTypes";
 
 const initialExpenseState = {
   expenses: [],
@@ -23,6 +27,21 @@ const expenseReducer = (state = initialExpenseState, action) => {
         expenses: filtered,
         total: state.total - parseInt(payload.cost),
       };
+    case DELETE_ALL_EXPENSES_OF_BUDGET: {
+      let expenseTotal = 0;
+      const filtered = state.expenses.reduce((accu, curr) => {
+        if (curr.category !== payload) {
+          expenseTotal += curr.cost;
+          accu.push(curr);
+        }
+        return accu;
+      }, []);
+      return {
+        ...state,
+        expenses: filtered,
+        total: expenseTotal,
+      };
+    }
     default:
       return state;
   }
