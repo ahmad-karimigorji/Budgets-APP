@@ -4,12 +4,16 @@ import styles from "./BudgetList.module.scss";
 import { HiOutlineTrash } from "react-icons/hi";
 import { deleteExpense } from "../redux/expense/expenseActions";
 
-const BudgetList = () => {
+const BudgetList = ({ setIsExpenseForm }) => {
   const { budgets } = useSelector((state) => state.budget);
   return (
     <div className={styles.budgetList}>
       {budgets.map((item) => (
-        <BudgetComponent key={item.id} budget={item} />
+        <BudgetComponent
+          key={item.id}
+          budget={item}
+          setIsExpenseForm={setIsExpenseForm}
+        />
       ))}
     </div>
   );
@@ -17,15 +21,15 @@ const BudgetList = () => {
 
 export default BudgetList;
 
-const BudgetComponent = ({ budget }) => {
+const BudgetComponent = ({ budget, setIsExpenseForm }) => {
   const { expense } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [isView, setIsView] = useState(false);
 
   const deleteHandler = (expense) => {
-    dispatch(deleteExpense(expense))
-    filteredExpense.length === 0 && setIsView(false)
-  }
+    dispatch(deleteExpense(expense));
+    filteredExpense.length === 0 && setIsView(false);
+  };
 
   let expenseTotal = 0;
   const filteredExpense = expense.expenses.reduce((accu, curr) => {
@@ -40,17 +44,32 @@ const BudgetComponent = ({ budget }) => {
     <div key={budget.id} className={styles.budgetBox}>
       <div className={styles.budgetDetails}>
         <h3>{budget.budgetName}</h3>
-        <span>
-          ${expenseTotal} / ${budget.amount}
-        </span>
+        <div>
+          <span
+            className={`${
+              expenseTotal >= budget.amount ? styles.expenseTotal : ""
+            }`}
+          >
+            ${expenseTotal}
+          </span>
+          <span> / </span>
+          <span className={styles.budgetAmount}>${budget.amount}</span>
+        </div>
       </div>
       <progress
-        className={styles.progressBar}
+        className={`${styles.progressBar} ${
+          expenseTotal >= budget.amount ? styles.fullProgress : ""
+        }`}
         value={expenseTotal}
         max={budget.amount}
       ></progress>
       <div className={styles.BtnBox}>
-        <button className={styles.addBtn}>Add Expense</button>
+        <button
+          className={styles.addBtn}
+          onClick={() => setIsExpenseForm(true)}
+        >
+          Add Expense
+        </button>
         <button
           className={styles.viewBtn}
           onClick={() => filteredExpense.length > 0 && setIsView(!isView)}

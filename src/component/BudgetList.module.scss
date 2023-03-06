@@ -5,7 +5,6 @@
   @include spaceY(20px);
   color: $textColor;
   padding: 15px 5px;
-  border-top: 1px solid $grayColor;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 370px));
   justify-items: center;
@@ -17,15 +16,22 @@
   margin: 0 auto;
   width: 100%;
   max-width: 370px;
-  &:not(:last-child) {
+
     padding-bottom: 15px;
     border-bottom: 1px solid $grayColor;
-  }
+  
 }
 .budgetDetails {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: 600;
+  .expenseTotal{
+    color: red;
+  }
+  .budgetAmount{
+    color: green;
+  }
 }
 .progressBar {
   width: 100%;
@@ -39,6 +45,13 @@
 .progressBar::-webkit-progress-value {
   background-color: $primaryColor;
 }
+.progressBar.fullProgress {
+  border: 1px solid red;
+}
+.progressBar.fullProgress::-webkit-progress-value {
+  background-color: red;
+}
+
 .BtnBox {
   @include spaceX(5px);
   justify-content: flex-end;

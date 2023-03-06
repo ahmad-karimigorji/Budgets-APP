@@ -4,9 +4,8 @@ import { addBudget } from "../redux/budget/budgetActions";
 import ExpenseForm from "./ExpenseForm";
 import styles from "./OverViewComponent.module.scss";
 
-const OverViewComponent = () => {
+const OverViewComponent = ({ isExpenseForm, setIsExpenseForm }) => {
   const [isBudgetForm, setIsBudgetForm] = useState(false);
-  const [isExpenseForm, setIsExpenseForm] = useState(false);
 
   const budgetFormHandler = () => {
     setIsBudgetForm(!isBudgetForm);
@@ -50,7 +49,10 @@ const BudgetForm = ({ setIsBudgetForm }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!formValue.budgetName.trim() || parseInt(formValue.amount.charAt()) < 1) {
+    if (
+      !formValue.budgetName.trim() ||
+      parseInt(formValue.amount.charAt()) < 1
+    ) {
       setError(true);
       return;
     }
@@ -59,11 +61,11 @@ const BudgetForm = ({ setIsBudgetForm }) => {
       ...formValue,
       amount: parseInt(formValue.amount),
       id: new Date().getTime(),
-      creatAt: new Date().toISOString()
-    }
+      creatAt: new Date().toISOString(),
+    };
     dispatch(addBudget(data));
     setFormValue({ budgetName: "", amount: "" });
-    setIsBudgetForm(false)
+    setIsBudgetForm(false);
   };
   return (
     <form className={styles.budgetForm} onSubmit={submitHandler}>
