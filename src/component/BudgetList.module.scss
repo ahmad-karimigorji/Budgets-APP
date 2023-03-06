@@ -6,12 +6,17 @@
   color: $textColor;
   padding: 15px 5px;
   border-top: 1px solid $grayColor;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 370px));
+  justify-items: center;
+  align-items: flex-start;
+  justify-content: center;
 }
 .budgetBox {
   @include spaceY(10px);
   margin: 0 auto;
   width: 100%;
-  max-width: 400px;
+  max-width: 370px;
   &:not(:last-child) {
     padding-bottom: 15px;
     border-bottom: 1px solid $grayColor;
@@ -44,5 +49,31 @@
   }
   .viewBtn {
     @include btnStyle(transparent, #bbb, $grayColor, 5px);
+  }
+}
+
+.viewExpense {
+  padding: 0 20px;
+}
+.viewBox {
+  &:not(:last-child) {
+    padding-bottom: 10px;
+  }
+  div {
+    @include spaceX(10px);
+    justify-content: space-between;
+    align-items: flex-start;
+    font-weight: 600;
+  }
+  .date {
+    font-size: 14px;
+    opacity: 0.5;
+  }
+  .iconBtn{
+    border: none;
+    padding: 2px;
+    color: $trashIconColor;
+    display: flex;
+    cursor: pointer;
   }
 }

@@ -38,7 +38,7 @@ const OverViewComponent = () => {
 export default OverViewComponent;
 
 const BudgetForm = ({ setIsBudgetForm }) => {
-  const [formValue, setFormValue] = useState({ budget: "", amount: "" });
+  const [formValue, setFormValue] = useState({ budgetName: "", amount: "" });
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
   const changeHandler = ({ target }) => {
@@ -50,13 +50,20 @@ const BudgetForm = ({ setIsBudgetForm }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!formValue.budget.trim() || parseInt(formValue.amount.charAt()) < 1) {
+    if (!formValue.budgetName.trim() || parseInt(formValue.amount.charAt()) < 1) {
       setError(true);
       return;
     }
     // console.log(formValue);
-    dispatch(addBudget(formValue));
-    setFormValue({ budget: "", amount: "" });
+    const data = {
+      ...formValue,
+      amount: parseInt(formValue.amount),
+      id: new Date().getTime(),
+      creatAt: new Date().toISOString()
+    }
+    dispatch(addBudget(data));
+    setFormValue({ budgetName: "", amount: "" });
+    setIsBudgetForm(false)
   };
   return (
     <form className={styles.budgetForm} onSubmit={submitHandler}>
@@ -64,8 +71,8 @@ const BudgetForm = ({ setIsBudgetForm }) => {
         <label>Budget Name</label>
         <input
           type="text"
-          name="budget"
-          value={formValue.budget}
+          name="budgetName"
+          value={formValue.budgetName}
           onChange={changeHandler}
         />
       </div>

@@ -8,7 +8,7 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
   const { budgets } = useSelector((state) => state.budget);
   const [formValue, setFormValue] = useState({
     category: "",
-    Description: "",
+    description: "",
     cost: "",
   });
   const [error, setError] = useState(false);
@@ -26,11 +26,19 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
       return;
     }
     // console.log(formValue);
-    dispatch(addExpense(formValue));
-    setFormValue({ category: "", Description: "", cost: "" });
+    const data = {
+      ...formValue,
+      cost: parseInt(formValue.cost),
+      category: parseInt(formValue.category),
+      id: new Date().getTime(),
+      creatAt: new Date().toISOString(),
+    };
+    dispatch(addExpense(data));
+    setFormValue({ category: "", description: "", cost: "" });
+    setIsExpenseForm(false)
   };
-  if(!budgets.length){
-    return <h3 className={styles.warning}>Enter new budget !!</h3>
+  if (!budgets.length) {
+    return <h3 className={styles.warning}>Enter new budget !!</h3>;
   }
   return (
     <form className={styles.expenseForm} onSubmit={submitHandler}>
@@ -43,7 +51,9 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
         >
           <option value="">Select category</option>
           {budgets.map((item) => (
-            <option value={item.budget}>{item.budget}</option>
+            <option key={item.id} value={item.id}>
+              {item.budgetName}
+            </option>
           ))}
         </select>
       </div>
@@ -51,8 +61,8 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
         <label>Description</label>
         <input
           type="text"
-          value={formValue.Description}
-          name="Description"
+          value={formValue.description}
+          name="description"
           onChange={changeHandler}
         />
       </div>
