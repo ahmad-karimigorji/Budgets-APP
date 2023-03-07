@@ -4,8 +4,12 @@ import { addBudget } from "../redux/budget/budgetActions";
 import { addExpense } from "../redux/expense/expenseActions";
 import styles from "./OverViewComponent.module.scss";
 
-const OverViewComponent = ({ isExpenseForm, setIsExpenseForm, isBudgetForm, setIsBudgetForm }) => {
-
+const OverViewComponent = ({
+  isExpenseForm,
+  setIsExpenseForm,
+  isBudgetForm,
+  setIsBudgetForm,
+}) => {
   const budgetFormHandler = () => {
     setIsBudgetForm(!isBudgetForm);
     setIsExpenseForm(false);
@@ -36,7 +40,6 @@ const OverViewComponent = ({ isExpenseForm, setIsExpenseForm, isBudgetForm, setI
 export default OverViewComponent;
 
 const BudgetForm = ({ setIsBudgetForm }) => {
-
   const [formValue, setFormValue] = useState({ budgetName: "", amount: "" });
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
@@ -51,6 +54,7 @@ const BudgetForm = ({ setIsBudgetForm }) => {
     e.preventDefault();
     if (
       !formValue.budgetName.trim() ||
+      !formValue.amount ||
       parseInt(formValue.amount.charAt()) < 1
     ) {
       setError(true);
@@ -105,9 +109,7 @@ const BudgetForm = ({ setIsBudgetForm }) => {
   );
 };
 
-
 const ExpenseForm = ({ setIsExpenseForm }) => {
-  
   const dispatch = useDispatch();
   const { budgets } = useSelector((state) => state.budget);
   const [formValue, setFormValue] = useState({
@@ -125,7 +127,12 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!formValue.category.trim() || !formValue.category.trim() || parseInt(formValue.amount.charAt()) < 1) {
+    if (
+      !formValue.category.trim() ||
+      !formValue.category.trim() ||
+      !formValue.amount ||
+      parseInt(formValue.amountformValue.amount.charAt()) < 1
+    ) {
       setError(true);
       return;
     }
@@ -139,7 +146,7 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
     };
     dispatch(addExpense(data));
     setFormValue({ category: "", description: "", amount: "" });
-    setIsExpenseForm(false)
+    setIsExpenseForm(false);
   };
   if (!budgets.length) {
     return <h3 className={styles.warning}>Enter new budget !!</h3>;
