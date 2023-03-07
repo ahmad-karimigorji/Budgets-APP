@@ -4,8 +4,7 @@ import { addBudget } from "../redux/budget/budgetActions";
 import { addExpense } from "../redux/expense/expenseActions";
 import styles from "./OverViewComponent.module.scss";
 
-const OverViewComponent = ({ isExpenseForm, setIsExpenseForm }) => {
-  const [isBudgetForm, setIsBudgetForm] = useState(false);
+const OverViewComponent = ({ isExpenseForm, setIsExpenseForm, isBudgetForm, setIsBudgetForm }) => {
 
   const budgetFormHandler = () => {
     setIsBudgetForm(!isBudgetForm);

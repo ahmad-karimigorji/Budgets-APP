@@ -8,7 +8,7 @@ import {
 } from "../redux/expense/expenseActions";
 import { deleteBudget } from "../redux/budget/budgetActions";
 
-const BudgetList = ({ setIsExpenseForm }) => {
+const BudgetList = ({ setIsExpenseForm, setIsBudgetForm }) => {
   const { budgets } = useSelector((state) => state.budget);
   return (
     <div className={styles.budgetList}>
@@ -17,6 +17,7 @@ const BudgetList = ({ setIsExpenseForm }) => {
           key={item.id}
           budget={item}
           setIsExpenseForm={setIsExpenseForm}
+          setIsBudgetForm={setIsBudgetForm}
         />
       ))}
     </div>
@@ -25,7 +26,7 @@ const BudgetList = ({ setIsExpenseForm }) => {
 
 export default BudgetList;
 
-const BudgetComponent = ({ budget, setIsExpenseForm }) => {
+const BudgetComponent = ({ budget, setIsExpenseForm, setIsBudgetForm }) => {
   const { expense } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [isView, setIsView] = useState(false);
@@ -76,7 +77,10 @@ const BudgetComponent = ({ budget, setIsExpenseForm }) => {
       <div className={styles.BtnBox}>
         <button
           className={styles.addBtn}
-          onClick={() => setIsExpenseForm(true)}
+          onClick={() => {
+            setIsExpenseForm(true);
+            setIsBudgetForm(false);
+          }}
         >
           Add Expense
         </button>
