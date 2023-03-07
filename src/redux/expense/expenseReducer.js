@@ -18,20 +18,20 @@ const expenseReducer = (state = initialExpenseState, action) => {
       return {
         ...state,
         expenses: newExpenses,
-        total: state.total + parseInt(payload.cost),
+        total: state.total + parseInt(payload.amount),
       };
     case DELETE_EXPENSE:
       const filtered = state.expenses.filter((item) => item.id !== payload.id);
       return {
         ...state,
         expenses: filtered,
-        total: state.total - parseInt(payload.cost),
+        total: state.total - parseInt(payload.amount),
       };
     case DELETE_ALL_EXPENSES_OF_BUDGET: {
       let expenseTotal = 0;
       const filtered = state.expenses.reduce((accu, curr) => {
         if (curr.category !== payload) {
-          expenseTotal += curr.cost;
+          expenseTotal += curr.amount;
           accu.push(curr);
         }
         return accu;

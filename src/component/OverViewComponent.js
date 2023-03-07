@@ -79,7 +79,7 @@ const BudgetForm = ({ setIsBudgetForm }) => {
         />
       </div>
       <div>
-        <label>Budget Value</label>
+        <label>Budget Amount</label>
         <input
           type="number"
           min={1}
@@ -113,7 +113,7 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
   const [formValue, setFormValue] = useState({
     category: "",
     description: "",
-    cost: "",
+    amount: "",
   });
   const [error, setError] = useState(false);
   const changeHandler = ({ target }) => {
@@ -125,20 +125,20 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!formValue.category.trim() || !formValue.category.trim() || parseInt(formValue.cost.charAt()) < 1) {
+    if (!formValue.category.trim() || !formValue.category.trim() || parseInt(formValue.amount.charAt()) < 1) {
       setError(true);
       return;
     }
     // console.log(formValue);
     const data = {
       ...formValue,
-      cost: parseInt(formValue.cost),
+      amount: parseInt(formValue.amount),
       category: parseInt(formValue.category),
       id: new Date().getTime(),
       creatAt: new Date().toISOString(),
     };
     dispatch(addExpense(data));
-    setFormValue({ category: "", description: "", cost: "" });
+    setFormValue({ category: "", description: "", amount: "" });
     setIsExpenseForm(false)
   };
   if (!budgets.length) {
@@ -162,7 +162,7 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
         </select>
       </div>
       <div>
-        <label>Description</label>
+        <label>Expense Description</label>
         <input
           type="text"
           value={formValue.description}
@@ -171,12 +171,12 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
         />
       </div>
       <div>
-        <label>Expense Value</label>
+        <label>Expense Amount</label>
         <input
           type="number"
           min={1}
-          value={formValue.cost}
-          name="cost"
+          value={formValue.amount}
+          name="amount"
           onChange={changeHandler}
         />
       </div>

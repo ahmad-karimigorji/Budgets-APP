@@ -45,7 +45,7 @@ const BudgetComponent = ({ budget, setIsExpenseForm, setIsBudgetForm }) => {
   let expenseTotal = 0;
   const filteredExpense = expense.expenses.reduce((accu, curr) => {
     if (curr.category === budget.id) {
-      expenseTotal += curr.cost;
+      expenseTotal += curr.amount;
       accu.push(curr);
     }
     return accu;
@@ -104,7 +104,7 @@ const BudgetComponent = ({ budget, setIsExpenseForm, setIsBudgetForm }) => {
             <div key={item.id} className={styles.viewBox}>
               <div>
                 <p>{item.description}</p>
-                <span>${item.cost}</span>
+                <span>${item.amount}</span>
               </div>
               <div>
                 <span className={styles.date}>{`${new Date(
