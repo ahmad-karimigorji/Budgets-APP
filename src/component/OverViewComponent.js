@@ -42,6 +42,7 @@ export default OverViewComponent;
 const BudgetForm = ({ setIsBudgetForm }) => {
   const [formValue, setFormValue] = useState({ budgetName: "", amount: "" });
   const [error, setError] = useState(false);
+  const { budgets } = useSelector((state) => state.budget);
   const dispatch = useDispatch();
   const changeHandler = ({ target }) => {
     setError(false);
@@ -72,7 +73,12 @@ const BudgetForm = ({ setIsBudgetForm }) => {
     setIsBudgetForm(false);
   };
   return (
-    <form className={styles.form} onSubmit={submitHandler}>
+    <form
+      className={`${styles.form} ${
+        budgets.length > 0 ? styles.formBorder : ""
+      }`}
+      onSubmit={submitHandler}
+    >
       <div>
         <label>Budget Name</label>
         <input
@@ -152,7 +158,7 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
     return <h3 className={styles.warning}>Enter new budget !!</h3>;
   }
   return (
-    <form className={styles.form} onSubmit={submitHandler}>
+    <form className={`${styles.form} ${styles.formBorder}`} onSubmit={submitHandler}>
       <div>
         <label>Expense Category</label>
         <select

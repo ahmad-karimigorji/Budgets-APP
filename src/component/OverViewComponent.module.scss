@@ -35,8 +35,7 @@
 .form {
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px 0;
-  border-bottom: 1px solid $grayColor;
+  padding: 20px 10px;
   > div:not(:last-child) {
     @include spaceY(5px);
     margin-bottom: 10px;
@@ -54,6 +53,9 @@
   .error {
     @include errorStyle;
   }
+}
+.form.formBorder{
+  border-bottom: 1px solid $grayColor;
 }
 .formBtnBox {
   @include spaceY(5px);
