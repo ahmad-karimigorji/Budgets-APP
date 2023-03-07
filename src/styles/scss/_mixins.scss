@@ -3,7 +3,7 @@
 @mixin media($width) {
   @if ($width == 480) {
     @media screen and (min-width: 480px) {
-        @content;
+      @content;
     }
   }
 }
@@ -31,18 +31,16 @@
     border-color: $primaryColor;
   }
 }
-@mixin spaceX($gap){
+@mixin spaceX($gap) {
   display: flex;
   gap: $gap;
-
 }
-@mixin spaceY($gap){
+@mixin spaceY($gap) {
   display: flex;
   flex-direction: column;
   gap: $gap;
-
 }
-@mixin errorStyle{
-    font-size: 13px;
-    color: $errorColor;
+@mixin errorStyle {
+  font-size: 13px;
+  color: $redColor;
 }

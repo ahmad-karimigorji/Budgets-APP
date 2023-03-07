@@ -1,7 +1,7 @@
 @import "../styles/scss/mixins";
 @import "../styles/scss/variables";
 
-.overView{
+.overView {
   position: sticky;
   top: 0;
   padding: 20px 0;
@@ -13,6 +13,9 @@
   align-items: center;
   padding: 20px 0;
   border-bottom: 1px solid $grayColor;
+  h2 {
+    color: $textColor;
+  }
 }
 
 .budgetBtn {
@@ -43,12 +46,12 @@
   }
   input,
   select {
-     @include inputStyle;
+    @include inputStyle;
     @include media(480) {
       flex-grow: 1;
     }
   }
-  .error{
+  .error {
     @include errorStyle;
   }
 }
@@ -63,10 +66,10 @@
     @include btnStyle($primaryColor, $whiteColor, $primaryColor, 5px 15px);
   }
   .cancelBtn {
-    @include btnStyle(transparent, $primaryColor, $primaryColor, 5px 15px);
+    @include btnStyle(transparent, $primaryColor, $grayColor, 5px 15px);
   }
 }
-.warning{
+.warning {
   text-align: center;
   color: $textColor;
 }
