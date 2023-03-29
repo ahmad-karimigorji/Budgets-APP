@@ -137,7 +137,7 @@ const ExpenseForm = ({ setIsExpenseForm }) => {
       !formValue.category.trim() ||
       !formValue.category.trim() ||
       !formValue.amount ||
-      parseInt(formValue.amountformValue.amount.charAt()) < 1
+      parseInt(formValue.amount.charAt()) < 1
     ) {
       setError(true);
       return;
